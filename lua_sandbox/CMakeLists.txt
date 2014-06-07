@@ -1,0 +1,15 @@
+FIND_PACKAGE(Lua51 REQUIRED)
+FIND_PACKAGE(Boost 1.54 COMPONENTS coroutine REQUIRED)
+
+INCLUDE_DIRECTORIES(
+	${LUA_INCLUDE_DIR}
+	${Boost_INCLUDE_DIR}
+)
+
+ADD_LIBRARY(lua_sandbox lua_sandbox.cpp)
+
+TARGET_LINK_LIBRARIES(lua_sandbox
+	${LUA_LIBRARIES}
+	pthread
+	${Boost_LIBRARIES}
+)
