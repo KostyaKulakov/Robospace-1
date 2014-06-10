@@ -25,6 +25,11 @@ public:
 	int call();
 	void sethook(lua_Hook hook, int mask, int count = 0);
 
+	void open_base();
+	void open_package();
+
+	void set_module(const char *name);
+
 	lua_State *L;
 };
 

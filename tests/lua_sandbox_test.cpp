@@ -3,6 +3,8 @@
 
 extern "C" {
 #include <lua.h>
+#include <lauxlib.h>
+#include <lualib.h>
 }
 
 TEST(lua_sandbox_test, create_destroy) {
@@ -50,4 +52,16 @@ TEST(lua_sandbox_test, fail_import) {
 	ASSERT_EQ(2, lua.call()) << "Failed to call function";
 	EXPECT_TRUE(lua_isnil(lua.L, -2)) << "First value should be nil";
 	EXPECT_TRUE(lua_isstring(lua.L, -1)) << "Second value should be string";
+}
+
+TEST(lua_sandbox_test, good_import) {
+	lua_sandbox lua;
+
+	lua.open_package();
+
+	lua_createtable(lua.L, 0, 0);
+	lua.set_module("success");
+
+	ASSERT_EQ(0, lua.load_file("tests/lua/good_import.lua")) << "Failed to load file";
+	ASSERT_EQ(0, lua.call()) << "Failed to call function";
 }

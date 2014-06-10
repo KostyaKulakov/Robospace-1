@@ -1,5 +1,9 @@
 #include "lua_sandbox.h"
 
+extern "C" {
+#include <lualib.h>
+}
+
 #include <iostream>
 
 void lua_sandbox::register_function(const std::string& name, lua_CFunction function) {
@@ -17,4 +21,23 @@ int lua_sandbox::call() {
 
 void lua_sandbox::sethook(lua_Hook hook, int mask, int count) {
 	lua_sethook(L, hook, mask, count);
+}
+
+void lua_sandbox::open_package() {
+	lua_pushcfunction(L, luaopen_package);
+	lua_call(L, 0, 0);
+}
+
+void lua_sandbox::open_base() {
+	lua_pushcfunction(L, luaopen_base);
+	lua_call(L, 0, 0);
+}
+
+void lua_sandbox::set_module(const char *name) {
+	lua_getglobal(L, "package");
+	lua_getfield(L, -1, "loaded");
+	lua_insert(L, -3);
+	lua_pop(L, 1);
+	lua_setfield(L, -2, name);
+	lua_pop(L, 1);
 }
