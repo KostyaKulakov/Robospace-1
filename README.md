@@ -5,6 +5,7 @@
 Build options:
 
 * `TEST` = ON | OFF. Build tests. Defaults to OFF.
+* `VERA` = ON | OFF. Perform style check. Defaults to OFF.
 * `CMAKE_BUILD_TYPE` = Debug | Release.
 
 Dependencies:
@@ -13,11 +14,12 @@ Dependencies:
 * >=lua-5.1
 * >=boost-1.54 (coroutine)
 * gtest (if TEST=ON)
+* vera++ (if VERA=ON)
 
 ```
 mkdir build
 cd build
-cmake .. -DTEST=ON|OFF -DCMAKE_BUILD_TYPE=Debug|Release
+cmake .. -DTEST=ON|OFF -DVERA=ON|OFF -DCMAKE_BUILD_TYPE=Debug|Release
 make -j <num-jobs>
 ```
 
