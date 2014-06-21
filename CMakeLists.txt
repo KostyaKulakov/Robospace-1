@@ -6,8 +6,7 @@ OPTION(VERA "Perform style check" OFF)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Weffc++ -Werror -fno-exceptions")
 
-INCLUDE_DIRECTORIES(
-)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR})
 
 ADD_SUBDIRECTORY(lua_sandbox)
 ADD_SUBDIRECTORY(cell_game)

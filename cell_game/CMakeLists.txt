@@ -1,6 +1,8 @@
-
 SET(CELL_GAME_SOURCES
-	cell_level.cpp)
+	cell_level.cpp
+	cell_game.cpp
+	lua_cell_game.cpp
+)
 
 ADD_LIBRARY(cell_game_lib ${CELL_GAME_SOURCES})
 

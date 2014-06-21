@@ -15,7 +15,7 @@ function back_from(dir)
 end
 
 function dfs(back)
-	for dir in directions do
+	for i, dir in pairs(directions) do
 		if dir ~= back then
 			if go(dir) then
 				dfs(back_from(dir))

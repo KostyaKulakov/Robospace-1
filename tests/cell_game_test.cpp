@@ -1,4 +1,5 @@
 #include "../cell_game/cell_level.h"
+#include "../cell_game/cell_game.h"
 
 #include <gtest/gtest.h>
 
@@ -31,4 +32,15 @@ TEST(cell_level_test, load_file) {
 			EXPECT_EQ(map[i][j], level.cell(i, j));
 		}
 	}
+}
+
+TEST(cell_game_test, game) {
+	cell_game game("tests/files/cell_game/1.level",
+			"tests/files/cell_game/2.lua");
+	position pos = game.get_position();
+	EXPECT_EQ(0, pos.x);
+	EXPECT_EQ(5, pos.y);
+	EXPECT_EQ(1, game.start());
+
+	std::cout << "Game ended in " << game.steps << " turns\n";
 }

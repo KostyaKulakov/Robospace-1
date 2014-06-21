@@ -6,6 +6,8 @@ extern "C" {
 
 #include <iostream>
 
+std::map<lua_State *, lua_sandbox *> lua_sandbox::luas;
+
 void lua_sandbox::register_function(const std::string& name, lua_CFunction function) {
 	lua_pushcfunction(L, function);
 	lua_setglobal(L, name.c_str());

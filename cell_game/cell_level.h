@@ -4,7 +4,17 @@
 #include <string>
 #include <vector>
 
+struct position {
+	int x;
+	int y;
+
+	bool operator==(const position& b) {
+		return x == b.x && y == b.y;
+	}
+};
+
 enum class cell_type { EMPTY, WALL, SOURCE, TARGET, UNKNOWN };
+enum class direction { LEFT, UP, DOWN, RIGHT, STAY };
 
 static inline cell_type get_cell_type(char c) {
 	if (c == '.') {
@@ -31,6 +41,8 @@ public:
 
 		return get_cell_type(map[x][y]);
 	}
+
+	position find_source();
 
 private:
 	std::vector<std::string> map;
