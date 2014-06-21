@@ -1,22 +1,34 @@
+SET(TEST_SOURCES
+	main.cpp
+	lua_sandbox_test.cpp
+	cell_game_test.cpp)
+
 FIND_PACKAGE(GTest REQUIRED)
 
 INCLUDE_DIRECTORIES(
 	${GTest_INCLUDE_DIR}
 )
 
-ADD_EXECUTABLE(run_tests main.cpp lua_sandbox_test.cpp)
+ADD_EXECUTABLE(tests ${TEST_SOURCES})
 
-TARGET_LINK_LIBRARIES(run_tests
+TARGET_LINK_LIBRARIES(tests
 	lua_sandbox
+	cell_game_lib
 	${GTEST_LIBRARIES}
 )
 
 ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/lua"
 	COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/lua
-	$<TARGET_FILE_DIR:run_tests>/lua
+	$<TARGET_FILE_DIR:tests>/lua
 	DEPENDS  "${CMAKE_CURRENT_SOURCE_DIR}/lua/*")
 
+ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/files"
+	COMMAND cmake -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/files
+	$<TARGET_FILE_DIR:tests>/files
+	DEPENDS  "${CMAKE_CURRENT_SOURCE_DIR}/files/*")
+
 ADD_CUSTOM_TARGET(test
-  COMMAND run_tests
-  DEPENDS run_tests ${CMAKE_CURRENT_BINARY_DIR}/lua
+  COMMAND tests
+  DEPENDS tests ${CMAKE_CURRENT_BINARY_DIR}/lua
+  DEPENDS tests ${CMAKE_CURRENT_BINARY_DIR}/files
   WORKING_DIRECTORY "${CMAKE_BINARY_DIR}")

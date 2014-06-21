@@ -4,12 +4,13 @@ PROJECT(robospace)
 OPTION(TEST "Compile tests" OFF)
 OPTION(VERA "Perform style check" OFF)
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Weffc++ -Werror")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wextra -Weffc++ -Werror -fno-exceptions")
 
 INCLUDE_DIRECTORIES(
 )
 
 ADD_SUBDIRECTORY(lua_sandbox)
+ADD_SUBDIRECTORY(cell_game)
 
 IF(TEST)
 	ADD_SUBDIRECTORY(tests)

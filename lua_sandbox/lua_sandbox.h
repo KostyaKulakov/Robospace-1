@@ -10,11 +10,13 @@ extern "C" {
 
 class lua_sandbox {
 public:
-	lua_sandbox() : L(lua_open()) {
+	lua_sandbox() : L(luaL_newstate()) {
 	}
 
 	~lua_sandbox() {
-		lua_close(L);
+		if (L) {
+			lua_close(L);
+		}
 	}
 
 	lua_sandbox(const lua_sandbox& copy) = delete;
