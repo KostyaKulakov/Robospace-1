@@ -44,3 +44,10 @@ TEST(cell_game_test, game) {
 
 	std::cout << "Game ended in " << game.steps << " turns\n";
 }
+
+TEST(cell_game_test, infinite_loop) {
+	cell_game game("tests/files/cell_game/1.level",
+			"tests/files/cell_game/stay.lua");
+	game.set_limit(10000);
+	EXPECT_EQ(0, game.start());
+}

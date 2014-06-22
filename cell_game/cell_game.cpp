@@ -19,6 +19,10 @@ cell_game::cell_game(const std::string& level, const std::string& robot)
 	this->robot.load_file(robot);
 }
 
+void cell_game::set_limit(int number) {
+	robot.sethook(abort_hook, LUA_HOOKCOUNT, number);
+}
+
 int cell_game::start() {
 	steps = 0;
 	win = false;

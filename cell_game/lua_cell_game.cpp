@@ -23,6 +23,11 @@ static int l_go(lua_State *L) {
 	return 1;
 }
 
+void abort_hook(lua_State *L, lua_Debug *) {
+	lua_pushstring(L, "You loose");
+	lua_error(L);
+}
+
 int luaopen_cell(lua_State *L) {
 	lua_pushnumber(L, static_cast<int>(direction::LEFT));
 	lua_setglobal(L, "LEFT");

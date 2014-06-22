@@ -10,7 +10,7 @@ class cell_game {
 public:
 	cell_game(const std::string& level, const std::string& robot);
 
-	// void set_limit(int number);
+	void set_limit(int number);
 
 	int start();
 
